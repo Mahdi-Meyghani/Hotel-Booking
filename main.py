@@ -8,10 +8,12 @@ class Hotel:
         self.hotel_id = hotel_id
 
     def book(self):
+        """Book a hotel by changing the available column to no"""
         df.loc[df["id"] == self.hotel_id, "available"] = "no"
         df.to_csv("hotels.csv", index=False)
 
     def available(self):
+        """Check the availability of the hotel"""
         availability = df.loc[df["id"] == self.hotel_id, "available"].squeeze()
         if availability == "yes":
             return True
