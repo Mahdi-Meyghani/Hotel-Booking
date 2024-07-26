@@ -29,6 +29,7 @@ class ReservationTicket:
         self.hotel_object = hotel_object
 
     def get(self):
+        """Create a reservation ticket"""
         text = f"""
         Thanks for your reservation!
         Here are your reservation data:
