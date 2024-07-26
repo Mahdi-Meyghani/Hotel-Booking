@@ -1,6 +1,6 @@
-Users can see the hotels list
+Users can see a list of hotels
 Users can book a hotel
-Users can get reservation ticket
+Users can get a reservation ticket
 
 classes:
     User
