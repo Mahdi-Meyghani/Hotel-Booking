@@ -17,9 +17,12 @@ class Hotel:
     def available(self):
         """Check the availability of the hotel"""
         availability = df.loc[df["id"] == self.hotel_id, "available"].squeeze()
-        if availability == "yes":
-            return True
-        else:
+        try:
+            if availability == "yes":
+                return True
+            else:
+                return False
+        except ValueError:
             return False
 
 
@@ -40,14 +43,35 @@ class ReservationTicket:
         return text
 
 
+class CreditCard:
+    df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
+
+    def __init__(self, number, expiration, holder, cvc):
+        self.number = number
+        self.expiration = expiration
+        self.holder = holder
+        self.cvc = cvc
+
+    def authenticate(self):
+        user_card = {"number": self.number, "expiration": self.expiration, "holder": self.holder, "cvc": self.cvc}
+        if user_card in self.df_cards:
+            return True
+        else:
+            return False
+
+
 print(df)
 id_ = input("Enter hotel id: ")
 hotel = Hotel(id_)
 
 if hotel.available():
-    hotel.book()
-    name = input("Enter your name: ")
-    reservation_ticket = ReservationTicket(name, hotel)
-    print(reservation_ticket.get())
+    credit_card = CreditCard(number="1234567890123456", expiration="12/26", holder="John Smith".upper(), cvc="123")
+    if credit_card.authenticate():
+        hotel.book()
+        name = input("Enter your name: ")
+        reservation_ticket = ReservationTicket(name, hotel)
+        print(reservation_ticket.get())
+    else:
+        print("There is a problem with your card payment !")
 else:
     print("Hotel is not available.")
