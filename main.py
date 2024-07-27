@@ -63,6 +63,7 @@ class CreditCard:
 
 class SecureCreditCard(CreditCard):
     def pass_validation(self, password):
+        """validate password of the card"""
         correct_pass = df_security_card.loc[df_security_card["number"] == self.number, "password"].squeeze()
         if password == correct_pass:
             return True
