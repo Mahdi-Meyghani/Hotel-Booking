@@ -37,7 +37,7 @@ class ReservationTicket:
         text = f"""
         Thanks for your reservation!
         Here are your reservation data:
-        Name: {self.customer_name}
+        Name: {self.customer_name.title()}
         Hotel: {self.hotel_object.name}
         City: {self.hotel_object.city}
         """
