@@ -53,6 +53,7 @@ class CreditCard:
         self.cvc = cvc
 
     def authenticate(self):
+        """Check if card exists"""
         user_card = {"number": self.number, "expiration": self.expiration, "holder": self.holder, "cvc": self.cvc}
         if user_card in self.df_cards:
             return True
