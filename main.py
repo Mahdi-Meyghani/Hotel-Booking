@@ -1,6 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv("hotels.csv", dtype={"id": str})
+df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
 
 
 class Hotel:
@@ -44,8 +45,6 @@ class ReservationTicket:
 
 
 class CreditCard:
-    df_cards = pd.read_csv("cards.csv", dtype=str).to_dict(orient="records")
-
     def __init__(self, number, expiration, holder, cvc):
         self.number = number
         self.expiration = expiration
@@ -55,7 +54,7 @@ class CreditCard:
     def authenticate(self):
         """Check if card exists"""
         user_card = {"number": self.number, "expiration": self.expiration, "holder": self.holder, "cvc": self.cvc}
-        if user_card in self.df_cards:
+        if user_card in df_cards:
             return True
         else:
             return False
