@@ -38,11 +38,16 @@ class ReservationTicket:
         text = f"""
         Thanks for your reservation!
         Here are your reservation data:
-        Name: {self.customer_name.title()}
+        Name: {self.the_customer_name}
         Hotel: {self.hotel_object.name}
         City: {self.hotel_object.city}
         """
         return text
+
+    @property
+    def the_customer_name(self):
+        the_name = self.customer_name.title()
+        return the_name
 
 
 class CreditCard:
